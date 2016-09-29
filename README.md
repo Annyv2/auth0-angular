@@ -167,15 +167,11 @@ auth.signin({}, function(profile, idToken, accessToken, state, refreshToken) {
 })
 ```
 
-A `connection` parameter can be passed to log in a user without displaying Lock.
-When using database connections, `username` and `password` can be passed as well.
-The snippet below will perform a to a call to `/oauth/ro`:
+You can also specify the connection you want to use by setting the `connections` parameter, as follows:
 
 ```js
 auth.signin({
-  username: $scope.username,
-  password: $scope.password,
-  connection: 'Username-Password-Authentication'
+  connections: ['Username-Password-Authentication']
 }, function(profile, idToken, accessToken, state, refreshToken) {
   // All good
   $location.path('/');
