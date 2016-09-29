@@ -1,5 +1,11 @@
 # Auth0 and AngularJS
 
+## Deprecation Notice
+
+**This SDK is for use with Lock v9. For use with Lock 10, see the [angular-lock](https://github.com/auth0/angular-auth0) and [angular-auth0](https://github.com/auth0/angular-lock) wrappers.**
+
+---
+
 This AngularJS module will help you implement client-side and server-side (API) authentication. It can be used together with [Auth0](https://www.auth0.com) to add support for username/password authentication, enterprise identity providers like Active Directory or SAML and also for social identity providers like Google, Facebook or Salesforce among others to your web, API and native mobile apps.
 
 [Auth0](https://www.auth0.com) is a cloud service that provides a turn-key solution for authentication, authorization and single sign-on.
@@ -28,8 +34,8 @@ npm install auth0-angular
 ### CDN
 
 ````html
-<script type="text/javascript" src="//cdn.auth0.com/js/lock-8.js"></script>
-<script type="text/javascript" src="//cdn.auth0.com/w2/auth0-angular-4.js"></script>
+<script type="text/javascript" src="//cdn.auth0.com/js/lock-9.0.js"></script>
+<script type="text/javascript" src="//cdn.auth0.com/w2/auth0-angular-4.2.6.js"></script>
 ````
 
 > **Warning**: If you use a CDN or download these scripts manually, be sure to include the versions of `auth0-lock` or `auth0.js` that match the versions [specified in the `bower.json`](https://github.com/auth0/auth0-angular/blob/master/bower.json#L7-L8).
@@ -108,7 +114,7 @@ There're many more things that you can do with `auth0-angular` in conjunction wi
 
 ### Preface: Authentication Modes
 
-There are three modes to handle authentication with all the providers (e.g. Facebook, Linkedin, GitGub, AD, LDAP) that Auth0 can handle: redirect, popup, and resource owner (`/oauth/ro`) CORS calls.
+There are three modes to handle authentication with all the providers (e.g. Facebook, Linkedin, GitHub, AD, LDAP) that Auth0 can handle: redirect, popup, and resource owner (`/oauth/ro`) CORS calls.
 
 When using **redirect mode**, the user will be redirected to the provider's login page for authentication.
 After authenticating, the user will be redirected back to the application with the requested user information in the hash fragment, which can be handled with Angular events.
@@ -175,7 +181,7 @@ auth.signin({
   $location.path('/');
 }, function(error) {
   // Error
-})
+}, 'Auth0')
 ```
 
 **Redirect mode** will be used when not passing success or error callbacks.
@@ -244,6 +250,13 @@ If the user has not attempted a login yet, this will be `null`.
 #### auth.isAuthenticated
 
 This flag returns whether there's a user authenticated or not.
+
+### auth.linkAccount(token, profile, options, successCallback, errCallback)
+
+API to link multiple accounts to primary account
+
+Note that `options.connection` must be provided because it tells Auth0 which account to link to
+
 
 #### auth.id_token, auth.access_token, auth.state
 
